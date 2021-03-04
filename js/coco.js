@@ -20,7 +20,18 @@ function gotResults(error, results){
 
 function setup(){
   createCanvas(640, 480);
-  video = createCapture(VIDEO);
+  var constraints = {
+    audio: false,
+    video: {
+      facingMode: {
+        exact: "environment"
+      }
+    }    
+    // video: {
+    //   facingMode: "user"
+    // } 
+  };
+  video = createCapture(constraints);
   video.size(640, 480);
   video.hide()
 
