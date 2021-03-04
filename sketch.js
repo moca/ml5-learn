@@ -1,32 +1,42 @@
-let img;
+let video;
 let detector;
+let detections = [];
 
 function preload(){
-  img = loadImage('img/dogncat_small.jpg');
-  detector = ml5.objectDetector('cocossd');
+  let modelName = 'cocossd'
+  console.log(`Loading model: ${modelName}`)
+  detector = ml5.objectDetector(modelName);
+  console.log("Model loaded !!")
 }
 
 function gotResults(error, results){
   if (error) {
     console.log(error);
   } else {
-    for(const obj of results){
-      console.log(obj);
-      stroke(0, 255,0);
-      strokeWeight(4);
-      noFill();
-      rect(obj.x, obj.y, obj.width, obj.height);
-      console.log(obj.x, obj.y, obj.width, obj.height);
-      noStroke();
-      fill(0);
-      textSize(24)
-      text(obj.label, obj.x + 10, obj.y + 34 )
-    }
+    detections = results;
   }
+  detector.detect(video, gotResults);
 }
 
 function setup(){
   createCanvas(640, 480);
-  image(img, 0,0, width, height);
-  detector.detect(img, gotResults);
+  video = createCapture(VIDEO);
+  video.size(640, 480);
+  video.hide()
+
+  detector.detect(video, gotResults);
+}
+
+function draw(){
+  image(video, 0, 0);
+  for(const obj of detections){
+    stroke(0, 255,0);
+    strokeWeight(4);
+    noFill();
+    rect(obj.x, obj.y, obj.width, obj.height);
+    noStroke();
+    fill(0);
+    textSize(24)
+    text(obj.label, obj.x + 10, obj.y + 34 )
+  }
 }
