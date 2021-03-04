@@ -30,7 +30,7 @@ function setup(){
 function draw(){
   image(video, 0, 0);
   for(const obj of detections){
-    stroke(0, 255,0);
+    stroke(255, 0,0);
     strokeWeight(4);
     noFill();
     rect(obj.x, obj.y, obj.width, obj.height);
