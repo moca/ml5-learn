@@ -20,7 +20,7 @@ function setup() {
   };
   createCanvas(640, 480);
   background(100);
-  video = createCapture(VIDEO);
+  video = createCapture(constraints);
   video.size(640, 480);
   video.hide()
 
