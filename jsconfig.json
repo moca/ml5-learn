@@ -1,0 +1,8 @@
+{
+  "include": [
+    "*.js",
+    "libraries/*.js",
+    "/Users/moca/.vscode/extensions/samplavigne.p5-vscode-1.2.6/p5types/global.d.ts",
+    "ts/ml5.d.ts"
+  ]
+}
